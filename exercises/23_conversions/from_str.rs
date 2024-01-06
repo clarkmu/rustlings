@@ -52,6 +52,35 @@ enum ParsePersonError {
 impl FromStr for Person {
     type Err = ParsePersonError;
     fn from_str(s: &str) -> Result<Person, Self::Err> {
+        if s.len() == 0 {
+            return Err(ParsePersonError::Empty);
+        }
+
+        let mut split: std::str::Split<'_, char> = s.split(',');
+
+        let name: String = match split.next() {
+            Some(n) => {
+                if n.len() == 0 {
+                    return Err(ParsePersonError::NoName);
+                }
+                n.to_string()
+            }
+            None => return Err(ParsePersonError::BadLen),
+        };
+
+        let age = match split.next() {
+            Some(a) => match a.parse::<usize>() {
+                Ok(a) => a,
+                Err(e) => return Err(ParsePersonError::ParseInt(e)),
+            },
+            None => return Err(ParsePersonError::BadLen),
+        };
+
+        if split.next() != None {
+            return Err(ParsePersonError::BadLen);
+        }
+
+        Ok(Person { name, age })
     }
 }
 
