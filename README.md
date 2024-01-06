@@ -1,3 +1,8 @@
+<div style="width: 100%; background: grey; height: 100vh; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-direction: column;">
+    <span><b>Michael Clark</b> has formally graduated from the Rustlings course with a grade of 3/3.</span>
+    <img src="./fenished.png" style="max-width: 500px;" />
+</div>
+
 <div class="oranda-hide">
 
 # rustlings 🦀❤️
